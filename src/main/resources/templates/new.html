@@ -35,8 +35,18 @@
     <br><br>
 
     <label for="player-password">Set player password  </label>
-    <input type="number" th:field="*{password}" id="player-password">
+    <input type="text" th:field="*{password}" id="player-password">
     <br><br>
+
+    <label>
+    <select required class="form-control form-control-sm w-50 mx-auto"  th:name="role"  size="2" >
+      <option  th:each="role : ${rolesList}"
+               th:text="${role.getNoPrefix()}"
+               th:value="${role.getId()}"
+               th:selected="${user.roles.contains(role)}">
+      </option>
+    </select>
+    </label>
 
 
     <input type="submit" value="Add player"/>

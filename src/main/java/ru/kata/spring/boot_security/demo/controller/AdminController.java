@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 @Controller
@@ -13,15 +15,21 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 public class AdminController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping()
     public  String printUsersList(ModelMap model) {
+        //User user = userService.getAuthUser();
+
         model.addAttribute("usersList", userService.getUsersList());
+        model.addAttribute("title", userService.getAuthUser());
+        model.addAttribute("rolesList", roleService.getRolesList());
         return "players-action";
     }
 
@@ -32,7 +40,7 @@ public class AdminController {
     }
 
     @GetMapping("new")
-    public String printAddForm(@ModelAttribute("user") User user) {
+    public String printAddForm(@ModelAttribute("user") User user, @ModelAttribute("role") Role role) {
         return "/new";
     }
 

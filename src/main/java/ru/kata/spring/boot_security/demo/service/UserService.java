@@ -12,5 +12,6 @@ public interface UserService extends UserDetailsService {
     void modifyUser(User user);
     User findUserById(Long id);
     User findUserByUsername(String nickName);
+    User getAuthUser();
     List<User> getUsersList();
 }

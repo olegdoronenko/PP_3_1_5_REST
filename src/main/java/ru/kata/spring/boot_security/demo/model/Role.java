@@ -28,7 +28,13 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return roleName;
+        if ("ROLE_USER".equals(getAuthority())) {
+            return "USER";
+        } else if ("ROLE_ADMIN".equals(getAuthority())) {
+            return "ADMIN";
+        } else {
+            return getAuthority();
+        }
     }
 
     public Long getId() {
@@ -47,8 +53,15 @@ public class Role implements GrantedAuthority {
         this.roleName = roleName;
     }
 
+    public String getNoPrefix() {
+        String pr = "ROLE_";
+        return roleName.substring(pr.length());
+    }
+
     @Override
     public String getAuthority() {
         return getRoleName();
     }
+
+
 }

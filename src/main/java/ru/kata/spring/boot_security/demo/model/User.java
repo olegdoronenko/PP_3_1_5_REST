@@ -18,6 +18,8 @@ public class User implements UserDetails {
     private String playerClass;
     private int playerLevel;
 
+    private String email;
+
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -32,10 +34,12 @@ public class User implements UserDetails {
     }
 
 
-    public User(String nickName, String playerClass, int playerLevel) {
+    public User(String nickName, String playerClass, int playerLevel, String email, String password) {
         this.nickName = nickName;
         this.playerClass = playerClass;
         this.playerLevel = playerLevel;
+        this.email = email;
+        this.password = password;
 
     }
 
@@ -141,5 +145,13 @@ public class User implements UserDetails {
     @Override
     public int hashCode() {
         return Objects.hash(id, nickName, playerClass, playerLevel);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

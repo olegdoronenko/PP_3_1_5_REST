@@ -2,92 +2,153 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>All players of the party</title>
-
+  <title>All players of the party</title>
 </head>
 
 <body>
+<!-- header string -->
 <ul class="nav bg-dark  ">
-    <li class="nav-item ">
-        <a class="nav-link active text-light"
-           th:text="|${title.getNickName()} with roles: ${title.getRoles()}|"></a>
-    </li>
+  <li class="nav-item ">
+    <a class="nav-link active text-light"
+       th:text="|${title.getNickName()} with roles: ${title.getRoles()}|"></a>
+  </li>
 
-    <li class="nav-item navbar-nav ml-auto pr-3 ">
-        <a class="nav-link text-secondary" href="/logout">logout</a>
-    </li>
+  <li class="nav-item navbar-nav ml-auto pr-3 ">
+    <a class="nav-link text-secondary" href="/logout">logout</a>
+  </li>
 </ul>
+<div class="row">
+
+  <div class="col-2 mt-3 ">
+    <ul class="nav nav-pills nav-fill flex-column ">
+      <li class="nav-item  ">
+        <a class="nav-link active text-left pl-3" href="#admin" data-toggle="pill">Admin</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-left pl-3" href="#user" data-toggle="pill">User</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="admin">
+        <div class="container ml-0 "> <!-- begin of container -->
+
+          <div class="row mt-3 m-0">
+            <h3>Admin panel</h3>
+          </div>
+
+          <ul class="nav nav-tabs">
+            <li >
+              <a class="nav-link active" href="#admin_panel" data-toggle="tab">Users table</a>
+            </li>
+            <li >
+              <a class="nav-link" href="#new_user" data-toggle="tab">New user</a>
+            </li>
+          </ul>
+
+          <div class="tab-content"> <!-- begin og tab-content -->
+            <div class="tab-pane active" id="admin_panel">
+              <ul class="list-group">
+                <li class="list-group-item"><strong>All your players</strong></li>
+              </ul>
+
+              <div class="container border">
+                <table class="table w-85 mx-auto table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nickname</th>
+                    <th scope="col">Player Class</th>
+                    <th scope="col">Player Level</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Player Password</th>
+                    <th scope="col">Player ROLES</th>
+
+                    <th scope="col">Edit info</th>
+                    <th scope="col">Delete player</th>
 
 
-<!--<h1>Players for our RPG</h1>-->
-<div>
-    <table class="table table-success table-striped">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nickname</th>
-            <th scope="col">Player Class</th>
-            <th scope="col">Player Level</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Player Password</th>
-            <th scope="col">Player ROLES</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="user : ${usersList}">
+                    <td th:text="${user.getId()}"/>
+                    <td th:text="${user.getNickName()}"/>
+                    <td th:text="${user.getPlayerClass()}"/>
+                    <td th:text="${user.getPlayerLevel()}"/>
+                    <td th:text="${user.getEmail()}"/>
+                    <td th:text="${user.getPassword()}"/>
 
-            <th scope="col">Modify player</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${usersList}">
-            <td th:text="${user.getId()}"/>
-            <td th:text="${user.getNickName()}"/>
-            <td th:text="${user.getPlayerClass()}"/>
-            <td th:text="${user.getPlayerLevel()}"/>
-            <td th:text="${user.getEmail()}"/>
-            <td th:text="${user.getPassword()}"/>
-<!--            <td th:text="${user.getRoles()}"/>-->
-            <td>
-            <th:block th:each="role : ${user.roles}">
-                <span th:text="${role.getNoPrefix()}"></span>
-            </th:block>
-            </td>
+                    <td>
+                      <th:block th:each="role : ${user.roles}">
+                        <span th:text="${role.getNoPrefix()}"></span>
+                      </th:block>
+                    </td>
 
 
-            <td>
-                <a th:href="@{admin/{id}(id=${user.getId()})}">
-                    <input type="button" value="Modify">
-                </a>
-            </td>
+                    <td>
+                      <button class="btn btn-info"  data-toggle="modal" th:href="${'#edit'+user.id}">edit</button>
+                    </td>
+                    <td>
+                      <button  class="btn btn-danger" data-toggle="modal" th:href="${'#delete'+user.id}">Delete</button>
+                    </td>
 
-        </tr>
-        </tbody>
-    </table>
-</div>
+                    <!-- modal edit -->
+                    <!-- end of modal edit -->
 
-<div th:align="center">
-    <a th:href="@{admin/new}">
-        <input type="button" value="Add new player to your party">
-    </a>
-</div>
+                    <!-- modal delete -->
+                    <!-- end of modal delete -->
 
-<div th:align="center">
-    <br>
-    <br>
-    <a th:href="@{/logout}">
-        <h8>Logout</h8>
-    </a>
-</div>
+                  </tr>
+                  </tbody>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                </table>
 
+
+
+              </div>
+
+            </div>
+
+
+
+          </div> <!-- end of tab-content -->
+
+        </div> <!-- end of container -->
+      </div>
+    </div>
+
+
+
+
+  </div> <!-- end of col -->
+
+</div> <!-- end of row -->
+
+
+
+<!-- scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+
+</script>
 
 </body>
 </html>

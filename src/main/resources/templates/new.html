@@ -39,9 +39,9 @@
     <br><br>
 
     <label>
-    <select required class="form-control form-control-sm w-50 mx-auto"  th:name="role"  size="2" >
+    <select required class="form-control form-control-sm w-50 mx-auto"  th:field="*{roles}">
       <option  th:each="role : ${rolesList}"
-               th:text="${role.getNoPrefix()}"
+               th:text="${role}"
                th:value="${role.getId()}"
                th:selected="${user.roles.contains(role)}">
       </option>

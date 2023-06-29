@@ -29,7 +29,7 @@ public class AdminController {
 
         model.addAttribute("usersList", userService.getUsersList());
         model.addAttribute("title", userService.getAuthUser());
-        model.addAttribute("rolesList", roleService.getRolesList());
+        //model.addAttribute("rolesList", roleService.getRolesList());
         return "players-action";
     }
 
@@ -40,7 +40,8 @@ public class AdminController {
     }
 
     @GetMapping("new")
-    public String printAddForm(@ModelAttribute("user") User user, @ModelAttribute("role") Role role) {
+    public String printAddForm(@ModelAttribute("user") User user, ModelMap model) {
+        model.addAttribute("rolesList", roleService.getRolesList());
         return "/new";
     }
 

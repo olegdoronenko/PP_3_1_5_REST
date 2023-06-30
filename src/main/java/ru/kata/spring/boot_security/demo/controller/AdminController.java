@@ -28,34 +28,35 @@ public class AdminController {
 
         model.addAttribute("usersList", userService.getUsersList());
         model.addAttribute("title", userService.getAuthUser());
-        //model.addAttribute("rolesList", roleService.getRolesList());
+        model.addAttribute("rolesList", roleService.getRolesList());
+        model.addAttribute("newUser", new User());
         return "players-action";
     }
 
     @GetMapping("{id}")
     public String printOneUser(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("user", userService.findUserById(id));
-        return "/show";
+        return "OLD-show";
     }
 
-    @GetMapping("new")
-    public String printAddForm(@ModelAttribute("user") User user, ModelMap model) {
-        model.addAttribute("rolesList", roleService.getRolesList());
-        return "/new";
-    }
+//    @GetMapping("new")
+//    public String printAddForm(@ModelAttribute("user") User user, ModelMap model) {
+//        model.addAttribute("rolesList", roleService.getRolesList());
+//        return "OLD-new";
+//    }
 
-    @GetMapping("{id}/edit")
-    public String printEditForm(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("user", userService.findUserById(id));
-        return "/edit";
-    }
+//    @GetMapping("{id}/edit")
+//    public String printEditForm(@PathVariable("id") Long id, ModelMap model) {
+//        model.addAttribute("user", userService.findUserById(id));
+//        return "OLD-edit";
+//    }
 
     @PostMapping()
     public String createNewUser(@ModelAttribute("user") User user, ModelMap model) {
         userService.addUser(user);
         model.addAttribute("user");
         printOneUser(user.getId(), model);
-        return "/show";
+        return "redirect:/admin";
     }
 
     @PatchMapping("{id}")

@@ -22,13 +22,14 @@ public class UserController {
 
     @GetMapping()
     public  String printUsersList(ModelMap model) {
-        model.addAttribute("usersList", userService.getUsersList());
-        return "players-common";
+        model.addAttribute("title", userService.getAuthUser());
+        //model.addAttribute("usersList", userService.getUsersList());
+        return "/player";
     }
 
-    @GetMapping("{id}")
-    public String printOneUser(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute(userService.findUserById(id));
-        return "/show-common";
-    }
+//    @GetMapping("{id}")
+//    public String printOneUser(@PathVariable("id") Long id, ModelMap model) {
+//        model.addAttribute(userService.findUserById(id));
+//        return "OLD-show-common";
+//    }
 }

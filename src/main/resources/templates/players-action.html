@@ -106,6 +106,49 @@
                     <!-- end of modal edit -->
 
                     <!-- modal delete -->
+                    <div class="modal fade" th:id="${'delete'+user.id}" tabindex="-1" aria-hidden="true">
+                      <form th:action="@{/admin/{id}(id=${user.getId()})}" th:method="delete" >
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalDelete">Edit user</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container-fluid">
+                                <div class="form-group  mt-1">
+                                  <label for="formGroupExampleId2" class="d-flex justify-content-center mb-0 font-weight-bold">ID</label>
+                                  <input type="text" class="form-control form-control-sm w-50 mx-auto" th:value="${user.getId()}"  id="formGroupExampleId2" placeholder="Id" disabled>
+                                </div>
+                                <div class="form-group mt-3">
+                                  <label for="formGroupExampleUsername2" class="d-flex justify-content-center mb-0 font-weight-bold">Nickname</label>
+                                  <input type="text" class="form-control form-control-sm w-50 mx-auto"  th:value="${user.getNickName()}" id="formGroupExampleUsername2" placeholder="Nickname" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="formGroupExampleSurname2" class="d-flex justify-content-center mb-0 font-weight-bold">Player Class</label>
+                                  <input type="text" class="form-control form-control-sm w-50 mx-auto"  th:value="${user.getPlayerClass()}" id="formGroupExampleSurname2" placeholder="Player Class" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="formGroupExampleAge2" class="d-flex justify-content-center mb-0 font-weight-bold">Player Level</label>
+                                  <input type="number" class="form-control form-control-sm w-50 mx-auto" th:value="${user.getPlayerLevel()}" id="formGroupExampleAge2" placeholder="Player Level" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="formGroupExampleEmail2" class="d-flex justify-content-center mb-0 font-weight-bold">Email</label>
+                                  <input type="text" class="form-control form-control-sm w-50 mx-auto"  th:value="${user.getEmail()}" id="formGroupExampleEmail2" placeholder="Email" disabled>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+
                     <!-- end of modal delete -->
 
                   </tr>

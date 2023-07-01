@@ -12,7 +12,7 @@ import java.util.Objects;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nickName;
     private String playerClass;
@@ -22,11 +22,14 @@ public class User implements UserDetails {
 
     private String password;
 
+
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "players_roles",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
+
 
 
     public User() {

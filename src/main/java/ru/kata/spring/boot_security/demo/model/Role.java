@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Role implements GrantedAuthority {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @Column(name = "role_name")
@@ -26,16 +26,16 @@ public class Role implements GrantedAuthority {
         this.roleName = roleName;
     }
 
-    @Override
-    public String toString() {
-        if ("ROLE_USER".equals(getAuthority())) {
-            return "USER";
-        } else if ("ROLE_ADMIN".equals(getAuthority())) {
-            return "ADMIN";
-        } else {
-            return getAuthority();
-        }
-    }
+//    @Override
+//    public String toString() {
+//        if ("ROLE_USER".equals(getAuthority())) {
+//            return "USER";
+//        } else if ("ROLE_ADMIN".equals(getAuthority())) {
+//            return "ADMIN";
+//        } else {
+//            return getAuthority();
+//        }
+//    }
 
     public Long getId() {
         return id;

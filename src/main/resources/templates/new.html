@@ -16,7 +16,7 @@
 <h1>Add new player to your party</h1>
 
 <div th:align="center">
-  <form th:method="POST" th:action="@{/admin}" th:object="${newUser}">
+  <form th:method="POST" th:action="@{/admin}" th:object="${user}">
     <br><br>
     <label for="nickname">Set nickname  </label>
     <input type="text" th:field="*{nickName}" id="nickname">

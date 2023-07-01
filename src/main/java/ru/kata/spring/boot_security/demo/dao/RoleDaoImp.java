@@ -48,4 +48,6 @@ public class RoleDaoImp implements RoleDao{
     public List<Role> getRoleList() {
         return entityManager.createQuery("FROM Role", Role.class).getResultList();
     }
+
+
 }

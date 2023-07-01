@@ -103,7 +103,7 @@
                     </td>
 
                     <!-- modal edit -->
-                    <div class="modal fade" th:id="${'edit'+user.id}" tabindex="-1" aria-hidden="true">
+                    <div class="modal fade" th:id="${'edit'+ user.id}" tabindex="-1" aria-hidden="true">
                       <form th:action="@{/admin/{id}(id=${user.id})}" th:method="patch">
                         <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
@@ -142,7 +142,7 @@
                                 <div class="form-group">
                                   <label  class="d-flex justify-content-center mb-0 font-weight-bold">Role</label>
                                   <select required class="form-control form-control-sm w-50 mx-auto"  th:name="roles"  size="2" >
-                                    <option  th:each="role : ${rolesList}"
+                                    <option  th:each="role : ${roleList}"
                                              th:text="${role.getNoPrefix()}"
                                              th:value="${role.getId()}"
                                              th:selected="${user.getRoles().contains(role)}">
@@ -212,46 +212,47 @@
               </div>
 
             </div>
-              <div class="tab-pane" id="new_user"> <!-- new user -->
-                <ul class="list-group">
-                  <li class="list-group-item"><strong>Add new Player to your Party</strong></li>
-                </ul>
+            <div class="tab-pane" id="new_user">   <!--  new_user    -->
+              <ul class="list-group">
+                <li class="list-group-item"><strong>Add new user</strong></li>
+              </ul>
 
-                <div class="container border ">
-                  <form th:action="@{/admin}" th:method="POST" th:object="${newUser}">
-                    <div class="form-group mt-3">
-                      <label for="nickName" class="d-flex justify-content-center mb-0 font-weight-bold">Nickname</label>
-                      <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{nickName}" id="nickName" placeholder="Nickname" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="playerClass" class="d-flex justify-content-center mb-0 font-weight-bold">Player Class</label>
-                      <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{playerClass}" id="playerClass" placeholder="Player Class" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="playerLevel" class="d-flex justify-content-center mb-0 font-weight-bold">Player Level</label>
-                      <input type="number" class="form-control form-control-sm w-25 mx-auto" th:field="*{playerLevel}" id="playerLevel" placeholder="Player Level" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="email" class="d-flex justify-content-center mb-0 font-weight-bold">Email</label>
-                      <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{email}" id="email" placeholder="Email" required >
-                    </div>
-                    <div class="form-group">
-                      <label for="password" class="d-flex justify-content-center mb-0 font-weight-bold">Password</label>
-                      <input type="text" class="form-control form-control-sm w-25 mx-auto" id="password" th:field="*{password}" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="role" class="d-flex justify-content-center mb-0 font-weight-bold">Role</label>
-                      <select  multiple class="form-control form-control-sm w-25 mx-auto" id="role" th:field="*{roles}"  size="2" >
-                        <option th:each="role : ${rolesList}"
-                                th:value="${role.id}"
-                                th:text="${role.getNoPrefix()}">
-                        </option>
-                      </select>
-                    </div>
-                    <button type="submit" class="btn btn-success btn-lg d-flex mx-auto mb-4">Add new Player</button>
-                  </form>
-                </div>
-              </div> <!-- en of new user -->
+              <div class="container border ">
+                <form th:action="@{/admin}" th:method="post" th:object="${newUser}">
+                  <div class="form-group mt-3">
+                    <label for="firstname" class="d-flex justify-content-center mb-0 font-weight-bold">Nickname</label>
+                    <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{nickName}" id="firstname" placeholder="nickName" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="surname" class="d-flex justify-content-center mb-0 font-weight-bold">Player Class</label>
+                    <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{playerClass}" id="surname" placeholder="Player Class" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="age" class="d-flex justify-content-center mb-0 font-weight-bold">Player Level</label>
+                    <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{playerLevel}" id="age" placeholder="Player level" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="email" class="d-flex justify-content-center mb-0 font-weight-bold">Email</label>
+                    <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{email}" id="email" placeholder="Email" required >
+                  </div>
+                  <div class="form-group">
+                    <label for="password" class="d-flex justify-content-center mb-0 font-weight-bold">Password</label>
+                    <input type="text" class="form-control form-control-sm w-25 mx-auto" id="password" th:field="*{password}" placeholder="Password" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="roles" class="d-flex justify-content-center mb-0 font-weight-bold">Role</label>
+                    <select multiple class="form-control form-control-sm w-25 mx-auto" id="roles" th:field="*{roles}"  size="2" >
+                      <option th:each="role : ${roleList}"
+                              th:value="${role.getId()}"
+                              th:text="${role.getNoPrefix()}">
+                      </option>
+                    </select>
+
+                  </div>
+                  <button type="submit" class="btn btn-success btn-lg d-flex mx-auto mb-4">Add new user</button>
+                </form>
+              </div>
+            </div>   <!--  end of new_user    -->
 
 
           </div> <!-- end of tab-content -->

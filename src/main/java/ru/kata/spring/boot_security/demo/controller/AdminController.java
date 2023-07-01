@@ -39,11 +39,11 @@ public class AdminController {
         return "OLD-show";
     }
 
-//    @GetMapping("new")
-//    public String printAddForm(@ModelAttribute("user") User user, ModelMap model) {
-//        model.addAttribute("rolesList", roleService.getRolesList());
-//        return "OLD-new";
-//    }
+    @GetMapping("new")
+    public String printAddForm(@ModelAttribute("user") User user, ModelMap model) {
+        model.addAttribute("rolesList", roleService.getRolesList());
+        return "OLD-new";
+    }
 
 //    @GetMapping("{id}/edit")
 //    public String printEditForm(@PathVariable("id") Long id, ModelMap model) {

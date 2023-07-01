@@ -41,7 +41,9 @@ public class UserServiceImp implements UserService{
 
     @Override
     public void modifyUser(User user) {
-        userDao.modifyUser(user);
+        User currentUser = findUserById(user.getId());
+        currentUser.setRoles(user.getRoles());
+        userDao.modifyUser(currentUser);
     }
 
     @Override

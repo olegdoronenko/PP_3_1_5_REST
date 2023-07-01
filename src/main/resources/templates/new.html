@@ -16,7 +16,7 @@
 <h1>Add new player to your party</h1>
 
 <div th:align="center">
-  <form th:method="POST" th:action="@{/admin}" th:object="${user}">
+  <form th:method="POST" th:action="@{/admin}" th:object="${newUser}">
     <br><br>
     <label for="nickname">Set nickname  </label>
     <input type="text" th:field="*{nickName}" id="nickname">
@@ -42,8 +42,7 @@
     <select required class="form-control form-control-sm w-50 mx-auto"  th:field="*{roles}">
       <option  th:each="role : ${rolesList}"
                th:text="${role}"
-               th:value="${role.getId()}"
-               th:selected="${user.roles.contains(role)}">
+               th:value="${role.getId()}">
       </option>
     </select>
     </label>

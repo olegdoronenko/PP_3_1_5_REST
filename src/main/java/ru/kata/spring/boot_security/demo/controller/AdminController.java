@@ -10,7 +10,7 @@ import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/")
 public class AdminController {
 
     private final UserService userService;
@@ -21,15 +21,21 @@ public class AdminController {
         this.userService = userService;
         this.roleService = roleService;
     }
+    @GetMapping("/")
+    public String getCredentials() {
+        return "redirect:/login";
+    }
 
-    @GetMapping()
+
+    @GetMapping("/admin")
     public  String printUsersList(ModelMap model) {
-        //User user = userService.getAuthUser();
+        User user = userService.getAuthUser();
 
         model.addAttribute("usersList", userService.getUsersList());
         model.addAttribute("title", userService.getAuthUser());
         model.addAttribute("rolesList", roleService.getRolesList());
         model.addAttribute("newUser", new User());
+        System.out.println("from mainGET" + user);
         return "players-action";
     }
 
@@ -42,7 +48,8 @@ public class AdminController {
     @GetMapping("new")
     public String printAddForm(@ModelAttribute("user") User user, ModelMap model) {
         model.addAttribute("rolesList", roleService.getRolesList());
-        return "OLD-new";
+        System.out.println("from printAddForm" + user);
+        return "redirect:/admin";
     }
 
 //    @GetMapping("{id}/edit")
@@ -52,10 +59,11 @@ public class AdminController {
 //    }
 
     @PostMapping()
-    public String createNewUser(@ModelAttribute("user") User user, ModelMap model) {
+    public String createNewUser(@ModelAttribute("user")  User user, ModelMap model) {
         userService.addUser(user);
         model.addAttribute("user");
         printOneUser(user.getId(), model);
+        System.out.println("from create" + user);
         return "redirect:/admin";
     }
 

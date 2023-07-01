@@ -12,7 +12,7 @@ import java.util.Objects;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nickName;
     private String playerClass;
@@ -144,7 +144,10 @@ public class User implements UserDetails {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nickName, playerClass, playerLevel);
+        return Objects.hash(id,
+                nickName,
+                playerClass,
+                playerLevel);
     }
 
     public String getEmail() {

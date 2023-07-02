@@ -10,6 +10,7 @@ import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -44,9 +45,24 @@ public class UserServiceImp implements UserService{
 
     @Override
     public void modifyUser(User user) {
-        User currentUser = findUserById(user.getId());
+        User currentUser = userRepository.findById(user.getId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+            currentUser.setEmail(user.getEmail());
+        }
+        if (user.getAge() != null) {
+            currentUser.setAge(user.getAge());
+        }
+        if (user.getFirstName() != null && !user.getFirstName().isEmpty()) {
+            currentUser.setFirstName(user.getFirstName());
+        }
+        if (user.getLastName() != null && !user.getLastName().isEmpty()) {
+            currentUser.setLastName(user.getLastName());
+        }
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            currentUser.setPassword(user.getPassword());
+        }
         currentUser.setRoles(user.getRoles());
-        userDao.modifyUser(currentUser);
+        userRepository.save(currentUser);
     }
 
     @Override

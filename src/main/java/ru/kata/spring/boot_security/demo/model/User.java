@@ -9,17 +9,20 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "players")
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nickName;
-    private String playerClass;
-    private int playerLevel;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "age")
+    private Integer age;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "email")
     private String email;
 
     @Column(name = "password")
@@ -28,7 +31,7 @@ public class User implements UserDetails {
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "players_roles",
+    @JoinTable(name = "users_roles",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
@@ -40,10 +43,10 @@ public class User implements UserDetails {
     }
 
 
-    public User(String nickName, String playerClass, int playerLevel, String email, String password) {
-        this.nickName = nickName;
-        this.playerClass = playerClass;
-        this.playerLevel = playerLevel;
+    public User(String firstName, String lastName, Integer age, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
         this.email = email;
         this.password = password;
 
@@ -65,7 +68,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getNickName();
+        return getFirstName();
     }
 
     @Override
@@ -104,28 +107,35 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getPlayerClass() {
-        return playerClass;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPlayerClass(String playerClass) {
-        this.playerClass = playerClass;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public int getPlayerLevel() {
-        return playerLevel;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setPlayerLevel(int playerLevel) {
-        this.playerLevel = playerLevel;
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String convertSetOfRoleToString(List<Role> roles) {
@@ -144,9 +154,9 @@ public class User implements UserDetails {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", nickName='" + nickName + '\'' +
-                ", playerClass='" + playerClass + '\'' +
-                ", playerLevel=" + playerLevel +
+                ", First Name ='" + firstName + '\'' +
+                ", Last Name ='" + lastName + '\'' +
+                ", Age =" + age +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
@@ -157,22 +167,17 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && playerLevel == user.playerLevel && Objects.equals(nickName, user.nickName) && Objects.equals(playerClass, user.playerClass);
+        return id == user.id && age == user.age && Objects.equals(firstName, user.firstName)
+                && Objects.equals(lastName, user.lastName);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id,
-                nickName,
-                playerClass,
-                playerLevel);
+                firstName,
+                lastName,
+                age);
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

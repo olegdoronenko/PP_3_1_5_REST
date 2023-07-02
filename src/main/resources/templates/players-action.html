@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <title>All players of the party</title>
+  <title>All users</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 <ul class="nav bg-dark  ">
   <li class="nav-item ">
     <a class="nav-link active text-light"
-       th:text="|${title.getNickName()} with roles: ${title.convertSetOfRoleToString(title.getRoles())}|"></a>
+       th:text="|${title.getFirstName()} with roles: ${title.convertSetOfRoleToString(title.getRoles())}|"></a>
   </li>
 
   <li class="nav-item navbar-nav ml-auto pr-3 ">
@@ -43,7 +43,7 @@
         <div class="container ml-0 "> <!-- begin of container -->
 
           <div class="row mt-3 m-0">
-            <h3>Game Master's sheet</h3>
+            <h3>Admin panel</h3>
           </div>
 
           <ul class="nav nav-tabs">
@@ -58,7 +58,7 @@
           <div class="tab-content"> <!-- begin of tab-content -->
             <div class="tab-pane active" id="admin_panel">
               <ul class="list-group">
-                <li class="list-group-item"><strong>All your players</strong></li>
+                <li class="list-group-item"><strong>All users</strong></li>
               </ul>
 
               <div class="container border">
@@ -66,12 +66,11 @@
                   <thead>
                   <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nickname</th>
-                    <th scope="col">Player Class</th>
-                    <th scope="col">Player Level</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Age</th>
                     <th scope="col">E-mail</th>
-                    <th scope="col">Player Password</th>
-                    <th scope="col">Player ROLES</th>
+                    <th scope="col">Role</th>
 
                     <th scope="col">Edit info</th>
                     <th scope="col">Delete player</th>
@@ -82,11 +81,10 @@
                   <tbody>
                   <tr th:each="user : ${usersList}">
                     <td th:text="${user.getId()}"/>
-                    <td th:text="${user.getNickName()}"/>
-                    <td th:text="${user.getPlayerClass()}"/>
-                    <td th:text="${user.getPlayerLevel()}"/>
+                    <td th:text="${user.getFirstName()}"/>
+                    <td th:text="${user.getLastName()}"/>
+                    <td th:text="${user.getAge()}"/>
                     <td th:text="${user.getEmail()}"/>
-                    <td th:text="${user.getPassword()}"/>
 
                     <td>
                       <th:block th:each="role : ${user.roles}">
@@ -120,16 +118,16 @@
                                   <input type="text" class="form-control form-control-sm w-50 mx-auto" id="formGroupExampleId" th:name="id" th:value="${user.getId()}" placeholder="Id" disabled>
                                 </div>
                                 <div class="form-group mt-3">
-                                  <label for="formGroupExampleFirstname" class="d-flex justify-content-center mb-0 font-weight-bold">Nickname</label>
-                                  <input type="text" class="form-control form-control-sm w-50 mx-auto" id="formGroupExampleFirstname" th:name="Nickname" th:value="${user.getNickName()}" placeholder="Nickname">
+                                  <label for="formGroupExampleFirstname" class="d-flex justify-content-center mb-0 font-weight-bold">First Name</label>
+                                  <input type="text" class="form-control form-control-sm w-50 mx-auto" id="formGroupExampleFirstname" th:name="firstname" th:value="${user.getFirstName()}" placeholder="First Name">
                                 </div>
                                 <div class="form-group">
-                                  <label for="formGroupExampleSurname" class="d-flex justify-content-center mb-0 font-weight-bold">Player Class</label>
-                                  <input type="text" class="form-control form-control-sm w-50 mx-auto" id="formGroupExampleSurname" th:name="PlayerClass" th:value="${user.getPlayerClass()}" placeholder="Player Class">
+                                  <label for="formGroupExampleSurname" class="d-flex justify-content-center mb-0 font-weight-bold">Last Name</label>
+                                  <input type="text" class="form-control form-control-sm w-50 mx-auto" id="formGroupExampleSurname" th:name="lastname" th:value="${user.getLastName()}" placeholder="Last Name">
                                 </div>
                                 <div class="form-group">
-                                  <label for="formGroupExampleAge" class="d-flex justify-content-center mb-0 font-weight-bold">Player Level</label>
-                                  <input type="number" class="form-control form-control-sm w-50 mx-auto" id="formGroupExampleAge" th:name="PlayerLevel" th:value="${user.getPlayerLevel()}" placeholder="Player Level">
+                                  <label for="formGroupExampleAge" class="d-flex justify-content-center mb-0 font-weight-bold">Age</label>
+                                  <input type="number" class="form-control form-control-sm w-50 mx-auto" id="formGroupExampleAge" th:name="age" th:value="${user.getAge()}" placeholder="Age">
                                 </div>
                                 <div class="form-group">
                                   <label for="formGroupExampleEmail" class="d-flex justify-content-center mb-0 font-weight-bold">Email</label>
@@ -180,16 +178,16 @@
                                   <input type="text" class="form-control form-control-sm w-50 mx-auto" th:value="${user.getId()}"  id="formGroupExampleId2" placeholder="Id" disabled>
                                 </div>
                                 <div class="form-group mt-3">
-                                  <label for="formGroupExampleUsername2" class="d-flex justify-content-center mb-0 font-weight-bold">Nickname</label>
-                                  <input type="text" class="form-control form-control-sm w-50 mx-auto"  th:value="${user.getNickName()}" id="formGroupExampleUsername2" placeholder="Nickname" disabled>
+                                  <label for="formGroupExampleUsername2" class="d-flex justify-content-center mb-0 font-weight-bold">First Name</label>
+                                  <input type="text" class="form-control form-control-sm w-50 mx-auto"  th:value="${user.getFirstName()}" id="formGroupExampleUsername2" placeholder="First Name" disabled>
                                 </div>
                                 <div class="form-group">
-                                  <label for="formGroupExampleSurname2" class="d-flex justify-content-center mb-0 font-weight-bold">Player Class</label>
-                                  <input type="text" class="form-control form-control-sm w-50 mx-auto"  th:value="${user.getPlayerClass()}" id="formGroupExampleSurname2" placeholder="Player Class" disabled>
+                                  <label for="formGroupExampleSurname2" class="d-flex justify-content-center mb-0 font-weight-bold">Last Name</label>
+                                  <input type="text" class="form-control form-control-sm w-50 mx-auto"  th:value="${user.getLastName()}" id="formGroupExampleSurname2" placeholder="Last Name" disabled>
                                 </div>
                                 <div class="form-group">
-                                  <label for="formGroupExampleAge2" class="d-flex justify-content-center mb-0 font-weight-bold">Player Level</label>
-                                  <input type="number" class="form-control form-control-sm w-50 mx-auto" th:value="${user.getPlayerLevel()}" id="formGroupExampleAge2" placeholder="Player Level" disabled>
+                                  <label for="formGroupExampleAge2" class="d-flex justify-content-center mb-0 font-weight-bold">Age</label>
+                                  <input type="number" class="form-control form-control-sm w-50 mx-auto" th:value="${user.getAge()}" id="formGroupExampleAge2" placeholder="Age" disabled>
                                 </div>
                                 <div class="form-group">
                                   <label for="formGroupExampleEmail2" class="d-flex justify-content-center mb-0 font-weight-bold">Email</label>
@@ -221,16 +219,16 @@
               <div class="container border ">
                 <form th:action="@{/admin}" th:method="post" th:object="${newUser}">
                   <div class="form-group mt-3">
-                    <label for="firstname" class="d-flex justify-content-center mb-0 font-weight-bold">Nickname</label>
-                    <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{nickName}" id="firstname" placeholder="nickName" required>
+                    <label for="firstname" class="d-flex justify-content-center mb-0 font-weight-bold">First Name</label>
+                    <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{firstName}" id="firstname" placeholder="First Name" required>
                   </div>
                   <div class="form-group">
-                    <label for="surname" class="d-flex justify-content-center mb-0 font-weight-bold">Player Class</label>
-                    <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{playerClass}" id="surname" placeholder="Player Class" required>
+                    <label for="surname" class="d-flex justify-content-center mb-0 font-weight-bold">Last Name</label>
+                    <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{lastName}" id="surname" placeholder="Last Name" required>
                   </div>
                   <div class="form-group">
-                    <label for="age" class="d-flex justify-content-center mb-0 font-weight-bold">Player Level</label>
-                    <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{playerLevel}" id="age" placeholder="Player level" required>
+                    <label for="age" class="d-flex justify-content-center mb-0 font-weight-bold">Age</label>
+                    <input type="text" class="form-control form-control-sm w-25 mx-auto" th:field="*{age}" id="age" placeholder="Age" required>
                   </div>
                   <div class="form-group">
                     <label for="email" class="d-flex justify-content-center mb-0 font-weight-bold">Email</label>
@@ -268,7 +266,7 @@
           </div>
 
           <ul class="list-group">
-            <li class="list-group-item bg-light"><strong>About You</strong></li>
+            <li class="list-group-item bg-light"><strong>About user</strong></li>
           </ul>
 
           <div class="container border pb-3">
@@ -279,19 +277,19 @@
               <thead>
               <tr>
                 <th>ID</th>
-                <th>Nickname</th>
-                <th>Your Class</th>
-                <th>Your Level</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
                 <th>Email</th>
-                <th>Your Roles</th>
+                <th>Roles</th>
               </tr>
               </thead>
               <tbody>
               <tr>
                 <td th:text="${title.getId()}"></td>
-                <td th:text="${title.getNickName()}"></td>
-                <td th:text="${title.getPlayerClass()}"></td>
-                <td th:text="${title.getPlayerLevel()}"></td>
+                <td th:text="${title.getFirstName()}"></td>
+                <td th:text="${title.getLastName()}"></td>
+                <td th:text="${title.getAge()}"></td>
                 <td th:text="${title.getEmail()}"></td>
                 <td>
                   <th:block th:each="role : ${title.roles}">

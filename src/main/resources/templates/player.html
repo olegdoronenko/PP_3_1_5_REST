@@ -15,7 +15,7 @@
 <ul class="nav bg-dark  ">
     <li class="nav-item ">
         <a class="nav-link active text-light"
-           th:text="|${title.getNickName()} with roles: ${title.convertSetOfRoleToString(title.getRoles())}|"></a>
+           th:text="|${title.getFirstName()} with roles: ${title.convertSetOfRoleToString(title.getRoles())}|"></a>
     </li>
 
     <li class="nav-item navbar-nav ml-auto pr-3 ">
@@ -39,11 +39,11 @@
                     <div class="tab-pane fade show" id="user"> <!-- user panel -->
                         <div class="container ml-0 ">
                             <div class="row mt-3 m-0">
-                                <h3>Information about your character</h3>
+                                <h3>User information-page</h3>
                             </div>
 
                             <ul class="list-group">
-                                <li class="list-group-item bg-light"><strong>Your stats</strong></li>
+                                <li class="list-group-item bg-light"><strong>About user</strong></li>
                             </ul>
 
                             <div class="container border pb-3">
@@ -54,19 +54,19 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nickname</th>
-                                        <th>Your Class</th>
-                                        <th>Your Level</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Age</th>
                                         <th>Email</th>
-                                        <th>Your Roles</th>
+                                        <th>Roles</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td th:text="${title.getId()}"></td>
-                                        <td th:text="${title.getNickName()}"></td>
-                                        <td th:text="${title.getPlayerClass()}"></td>
-                                        <td th:text="${title.getPlayerLevel()}"></td>
+                                        <td th:text="${title.getFirstName()}"></td>
+                                        <td th:text="${title.getLastName()}"></td>
+                                        <td th:text="${title.getAge()}"></td>
                                         <td th:text="${title.getEmail()}"></td>
                                         <td>
                                             <th:block th:each="role : ${title.roles}">

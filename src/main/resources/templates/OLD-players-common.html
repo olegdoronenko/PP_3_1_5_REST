@@ -1,58 +1,58 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  &lt;!&ndash; Required meta tags &ndash;&gt;-->
+<!--  <meta charset="utf-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--  &lt;!&ndash; Bootstrap CSS &ndash;&gt;-->
+<!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+<!--        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
 
-  <title>All players of the party</title>
+<!--  <title>All players of the party</title>-->
 
-</head>
+<!--</head>-->
 
-<body>
-<h1>Players for our RPG</h1>
-<div>
-  <table class="table table-success table-striped">
-    <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nickname</th>
-      <th scope="col">Player Class</th>
-      <th scope="col">Player Level</th>
-      <th scope="col">Show more info</th>
-
-
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${usersList}">
-      <td th:text="${user.getId()}"/>
-      <td th:text="${user.getNickName()}"/>
-      <td th:text="${user.getPlayerClass()}"/>
-      <td th:text="${user.getPlayerLevel()}"/>
-      <td>
-        <a th:href="@{user/{id}(id=${user.getId()})}">
-          <input type="button" value="Info">
-        </a>
-      </td>
+<!--<body>-->
+<!--<h1>Players for our RPG</h1>-->
+<!--<div>-->
+<!--  <table class="table table-success table-striped">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th scope="col">ID</th>-->
+<!--      <th scope="col">Nickname</th>-->
+<!--      <th scope="col">Player Class</th>-->
+<!--      <th scope="col">Player Level</th>-->
+<!--      <th scope="col">Show more info</th>-->
 
 
-    </tr>
-    </tbody>
-  </table>
-</div>
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="user : ${usersList}">-->
+<!--      <td th:text="${user.getId()}"/>-->
+<!--      <td th:text="${user.getNickName()}"/>-->
+<!--      <td th:text="${user.getPlayerClass()}"/>-->
+<!--      <td th:text="${user.getPlayerLevel()}"/>-->
+<!--      <td>-->
+<!--        <a th:href="@{user/{id}(id=${user.getId()})}">-->
+<!--          <input type="button" value="Info">-->
+<!--        </a>-->
+<!--      </td>-->
 
-<div th:align="center">
-  <br>
-  <br>
-  <a th:href="@{/logout}">
-    <h8>Logout</h8>
-  </a>
-</div>
 
-</body>
-</html>
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--</div>-->
+
+<!--<div th:align="center">-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  <a th:href="@{/logout}">-->
+<!--    <h8>Logout</h8>-->
+<!--  </a>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->

@@ -19,8 +19,10 @@ public class User implements UserDetails {
     private String playerClass;
     private int playerLevel;
 
+    @Column(unique = true)
     private String email;
 
+    @Column(name = "password")
     private String password;
 
 

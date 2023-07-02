@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -123,6 +124,18 @@ public class User implements UserDetails {
 
     public void setPlayerLevel(int playerLevel) {
         this.playerLevel = playerLevel;
+    }
+
+    public String convertSetOfRoleToString(List<Role> roles) {
+        StringBuilder sb = new StringBuilder();
+        for (Role role : roles) {
+            if (role.getRoleName().contains("ROLE_ADMIN")) {
+                sb.append("ADMIN ");
+            } else if (role.getRoleName().contains("ROLE_USER")) {
+                sb.append("USER ");
+            }
+        }
+        return sb.toString();
     }
 
     @Override

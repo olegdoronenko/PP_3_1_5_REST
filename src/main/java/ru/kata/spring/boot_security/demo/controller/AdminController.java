@@ -38,7 +38,7 @@ public class AdminController {
         model.addAttribute("newUser", new User());
 //        System.out.println(roleService.getRolesList().equals(roleService.getRolesList2()));
 //        System.out.println(roleService.getRolesList());
-        System.out.println(roleService.getRolesList2());
+//        System.out.println(roleService.getRolesList2());
         return "players-action";
     }
 
@@ -79,7 +79,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("admin/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";

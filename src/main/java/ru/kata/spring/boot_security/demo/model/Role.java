@@ -5,6 +5,7 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -26,16 +27,16 @@ public class Role implements GrantedAuthority {
         this.roleName = roleName;
     }
 
-//    @Override
-//    public String toString() {
-//        if ("ROLE_USER".equals(getAuthority())) {
-//            return "USER";
-//        } else if ("ROLE_ADMIN".equals(getAuthority())) {
-//            return "ADMIN";
-//        } else {
-//            return getAuthority();
-//        }
-//    }
+    @Override
+    public String toString() {
+        if ("ROLE_USER".equals(getAuthority())) {
+            return "USER";
+        } else if ("ROLE_ADMIN".equals(getAuthority())) {
+            return "ADMIN";
+        } else {
+            return getAuthority();
+        }
+    }
 
     public Long getId() {
         return id;

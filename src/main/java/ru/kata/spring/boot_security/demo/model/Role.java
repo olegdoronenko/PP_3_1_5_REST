@@ -25,6 +25,29 @@ public class Role implements GrantedAuthority {
         this.roleName = roleName;
     }
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public String getNoPrefix() {
+        String pr = "ROLE_";
+        return roleName.substring(pr.length());
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+
     @Override
     public String toString() {
         if ("ROLE_USER".equals(getAuthority())) {
@@ -34,27 +57,6 @@ public class Role implements GrantedAuthority {
         } else {
             return getAuthority();
         }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public String getNoPrefix() {
-        String pr = "ROLE_";
-        return roleName.substring(pr.length());
     }
 
     @Override

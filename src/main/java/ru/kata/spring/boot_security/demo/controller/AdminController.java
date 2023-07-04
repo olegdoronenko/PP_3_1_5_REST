@@ -29,10 +29,10 @@ public class AdminController {
 
     @GetMapping("/admin")
     public  String printUsersList(ModelMap model) {
-
+        User user = userService.getAuthUser();
         model.addAttribute("usersList", userService.getUsersList());
         model.addAttribute("title", userService.getAuthUser());
-        model.addAttribute("roleList", roleService.getRolesList2());
+        model.addAttribute("roleList", roleService.getRolesList());
         model.addAttribute("newUser", new User());
         return "players-action";
     }

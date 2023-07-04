@@ -70,42 +70,54 @@ public class UserServiceImp implements UserService{
 
 //    @Override
 //    public void modifyUser(User user) {
-//        User currentUser = userRepository.findById(user.getId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
-//        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
-//            currentUser.setEmail(user.getEmail());
-//        }
-//        if (user.getAge() != null ) {
-//            currentUser.setAge(user.getAge());
-//        }
-//        if (user.getFirstName() != null && !user.getFirstName().isEmpty()) {
-//            currentUser.setFirstName(user.getFirstName());
-//        }
-//        if (user.getLastName() != null && !user.getLastName().isEmpty()) {
-//            currentUser.setLastName(user.getLastName());
-//        }
-//        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
-//            currentUser.setPassword(user.getPassword());
-//        }
+//        userRepository.
+//    }
+
+    @Override
+    public void modifyUser(User user) {
+        //User currentUser = userRepository.findById(user.getId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        User currentUser = new User();
+        currentUser.setId(user.getId());
+
+        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+            currentUser.setEmail(user.getEmail());
+        }
+        if (user.getAge() != null ) {
+            currentUser.setAge(user.getAge());
+        }
+        if (user.getFirstName() != null && !user.getFirstName().isEmpty()) {
+            currentUser.setFirstName(user.getFirstName());
+        }
+        if (user.getLastName() != null && !user.getLastName().isEmpty()) {
+            currentUser.setLastName(user.getLastName());
+        }
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            currentUser.setPassword(user.getPassword());
+        }
+        currentUser.setRoles(user.getRoles());
+
+        userRepository.save(currentUser);
+
+    }
+//        @Override
+//    public void modifyUser(User user) {
+//        User currentUser = new User();
+//
+//        currentUser.setId(user.getId());
+//
+//        currentUser.setEmail(user.getEmail());
+//
+//        currentUser.setAge(user.getAge());
+//
+//        currentUser.setFirstName(user.getFirstName());
+//
+//        currentUser.setLastName(user.getLastName());
+//
+//        currentUser.setPassword(user.getPassword());
+//
 //        currentUser.setRoles(user.getRoles());
 //        userRepository.save(currentUser);
 //    }
-        @Override
-    public void modifyUser(User user) {
-        User currentUser = findUserById(user.getId());
-
-        currentUser.setEmail(user.getEmail());
-
-        currentUser.setAge(user.getAge());
-
-        currentUser.setFirstName(user.getFirstName());
-
-        currentUser.setLastName(user.getLastName());
-
-        currentUser.setPassword(user.getPassword());
-
-        currentUser.setRoles(user.getRoles());
-        userRepository.save(currentUser);
-    }
 
 
 }

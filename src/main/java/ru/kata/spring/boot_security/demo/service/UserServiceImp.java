@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
-import javax.persistence.EntityNotFoundException;
+
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
